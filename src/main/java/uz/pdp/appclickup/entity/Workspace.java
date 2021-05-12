@@ -4,11 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import uz.pdp.appclickup.entity.template.AbstractEntity;
+import uz.pdp.appclickup.entity.template.AbsLongEntity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 
 @EqualsAndHashCode(callSuper = true)
@@ -16,7 +14,8 @@ import javax.persistence.OneToOne;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Workspace extends AbstractEntity {
+@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"name", "owner_id"})})
+public class Workspace extends AbsLongEntity {
 
     @Column(nullable = false)
     private String name;
@@ -24,11 +23,27 @@ public class Workspace extends AbstractEntity {
     @Column(nullable = false)
     private String color;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    private User owner;
+
     @Column(nullable = false)
     private String initialLetter;
 
-    @OneToOne
+    @ManyToOne
     private Attachment avatar;
 
+
+    public Workspace(String name, String color, User owner, Attachment avatar) {
+        this.name = name;
+        this.color = color;
+        this.owner = owner;
+        this.avatar = avatar;
+    }
+
+    @PrePersist
+    @PreUpdate
+    public void setInitialLetterMyMethod() {
+        this.initialLetter = name.substring(0,1);
+    }
 
 }

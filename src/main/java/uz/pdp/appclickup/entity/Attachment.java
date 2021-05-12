@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import uz.pdp.appclickup.entity.template.AbstractEntity;
+import uz.pdp.appclickup.entity.template.AbsUUIDEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,7 +14,7 @@ import javax.persistence.Entity;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Attachment extends AbstractEntity {
+public class Attachment extends AbsUUIDEntity {
 
     @Column(nullable = false)
     private String name;

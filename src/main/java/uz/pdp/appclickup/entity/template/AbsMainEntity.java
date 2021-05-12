@@ -6,17 +6,16 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.UUID;
 
 @MappedSuperclass
 @Data
-public abstract class AbstractEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+@EntityListeners(AuditingEntityListener.class)
+public abstract class AbsMainEntity {
 
     @Column(nullable = false, updatable = false)
     @CreationTimestamp
@@ -26,11 +25,11 @@ public abstract class AbstractEntity {
     @UpdateTimestamp
     private Timestamp updatedAt;
 
-    @Column(nullable = false)
+    @JoinColumn(updatable = false)
     @CreatedBy
-    private Long createdBy;
+    private UUID createdBy;
 
     @LastModifiedBy
-    private Long updatedBy;
+    private UUID updatedBy;
 
 }

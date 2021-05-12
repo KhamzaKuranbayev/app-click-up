@@ -5,19 +5,16 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import uz.pdp.appclickup.entity.template.AbstractEntity;
+import uz.pdp.appclickup.entity.template.AbsLongEntity;
 
 import javax.persistence.*;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Space {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Space extends AbsLongEntity{
 
     @Column(nullable = false)
     private String name;
@@ -28,7 +25,7 @@ public class Space {
     @Column(nullable = false)
     private String initialLetter;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Icon icon;
 
     @OneToOne
@@ -37,10 +34,25 @@ public class Space {
     @Column(nullable = false)
     private String accessType;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Workspace workspace;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private User owner;
 
+    @PrePersist
+    @PreUpdate
+    public void setInitialLetterMyMethod() {
+        this.initialLetter = name.substring(0,1);
+    }
+
+    public Space(String name, String color, Icon icon, Attachment avatar, String accessType, Workspace workspace, User owner) {
+        this.name = name;
+        this.color = color;
+        this.icon = icon;
+        this.avatar = avatar;
+        this.accessType = accessType;
+        this.workspace = workspace;
+        this.owner = owner;
+    }
 }

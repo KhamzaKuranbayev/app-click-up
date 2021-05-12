@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import uz.pdp.appclickup.entity.template.AbstractEntity;
+import uz.pdp.appclickup.entity.template.AbsUUIDEntity;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -14,17 +14,21 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class WorkspaceUser extends AbstractEntity {
+public class WorkspaceUser extends AbsUUIDEntity {
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Workspace workspace;
 
-    @ManyToOne
-    private User user;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    private User member;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private WorkspaceRole workspaceRole;
 
+    @Column(nullable = false)
+    private Timestamp dateInvited;
+
     private Timestamp dateJoined;
+
 
 }

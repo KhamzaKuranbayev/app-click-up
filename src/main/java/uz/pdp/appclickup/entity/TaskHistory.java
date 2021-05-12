@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import uz.pdp.appclickup.entity.template.AbstractEntity;
+import uz.pdp.appclickup.entity.template.AbsLongEntity;
 
 import javax.persistence.*;
 
@@ -13,7 +13,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class TaskHistory extends AbstractEntity {
+public class TaskHistory extends AbsLongEntity {
 
     @ManyToOne
     private Task task;

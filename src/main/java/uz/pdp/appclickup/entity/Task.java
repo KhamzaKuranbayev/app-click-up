@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import uz.pdp.appclickup.entity.template.AbstractEntity;
+import uz.pdp.appclickup.entity.template.AbsLongEntity;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -15,7 +15,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Task extends AbstractEntity {
+public class Task extends AbsLongEntity {
 
     @Column(nullable = false)
     private String name;
