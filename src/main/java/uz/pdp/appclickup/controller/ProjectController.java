@@ -4,6 +4,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uz.pdp.appclickup.dto.ProjectDTO;
+import uz.pdp.appclickup.dto.ProjectUserDTO;
 import uz.pdp.appclickup.dto.Response;
 import uz.pdp.appclickup.entity.Project;
 import uz.pdp.appclickup.entity.Space;
@@ -30,7 +31,6 @@ public class ProjectController {
         return ResponseEntity.status(projectList != null ? 200 : 409).body(projectList);
     }
 
-
     @PostMapping
     public HttpEntity<?> addProject(@Valid @RequestBody ProjectDTO projectDTO) {
         Response response = projectService.addProject(projectDTO);
@@ -48,4 +48,8 @@ public class ProjectController {
         Response response = projectService.deleteProject(id, spaceId, user);
         return ResponseEntity.status(response.isSuccess() ? 200 : 409).body(response);
     }
+
+
+
+
 }

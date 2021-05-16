@@ -3,11 +3,15 @@ package uz.pdp.appclickup.service;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 import uz.pdp.appclickup.dto.ProjectDTO;
+import uz.pdp.appclickup.dto.ProjectUserDTO;
 import uz.pdp.appclickup.dto.Response;
 import uz.pdp.appclickup.entity.Project;
+import uz.pdp.appclickup.entity.ProjectUser;
 import uz.pdp.appclickup.entity.User;
 import uz.pdp.appclickup.repository.ProjectRepository;
+import uz.pdp.appclickup.repository.ProjectUserRepository;
 import uz.pdp.appclickup.repository.SpaceRepository;
+import uz.pdp.appclickup.repository.UserRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,11 +21,17 @@ public class ProjectServiceImpl implements ProjectService {
 
     final ProjectRepository projectRepository;
     final SpaceRepository spaceRepository;
+    final UserRepository userRepository;
+    final ProjectUserRepository projectUserRepository;
 
     public ProjectServiceImpl(ProjectRepository projectRepository,
-                              SpaceRepository spaceRepository) {
+                              SpaceRepository spaceRepository,
+                              UserRepository userRepository,
+                              ProjectUserRepository projectUserRepository) {
         this.projectRepository = projectRepository;
         this.spaceRepository = spaceRepository;
+        this.userRepository = userRepository;
+        this.projectUserRepository = projectUserRepository;
     }
 
     @Override
@@ -69,4 +79,5 @@ public class ProjectServiceImpl implements ProjectService {
         projectRepository.deleteById(id);
         return new Response("Project deleted!", true);
     }
+
 }

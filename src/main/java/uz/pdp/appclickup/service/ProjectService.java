@@ -17,4 +17,5 @@ public interface ProjectService {
     Response deleteProject(Long id, Long spaceId, User user);
 
     List<Project> findAllProject(Long spaceId, User user);
+
 }
