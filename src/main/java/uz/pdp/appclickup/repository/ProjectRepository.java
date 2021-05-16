@@ -10,7 +10,7 @@ import java.util.UUID;
 @Repository
 public interface ProjectRepository extends JpaRepository<Project, Long> {
 
-    boolean existsByI(Long id);
+    boolean existsById(Long id);
 
     List<Project> findAllBySpaceIdAndCreatedBy(Long space_id, UUID createdBy);
 }

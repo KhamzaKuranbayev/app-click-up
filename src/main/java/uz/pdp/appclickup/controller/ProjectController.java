@@ -25,7 +25,7 @@ public class ProjectController {
         this.projectService = projectService;
     }
 
-    @PostMapping
+    @GetMapping
     public HttpEntity<?> findAllProject(@RequestParam Long spaceId, @CurrentUser User user) {
         List<Project> projectList = projectService.findAllProject(spaceId, user);
         return ResponseEntity.status(projectList != null ? 200 : 409).body(projectList);

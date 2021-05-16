@@ -57,7 +57,7 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public Response editProject(Long id, ProjectDTO projectDTO, User user) {
 
-        if (!projectRepository.existsByI(id))
+        if (!projectRepository.existsById(id))
             return new Response("Such project was not found!", false);
 
         Optional<Project> optionalProject = projectRepository.findById(id);
@@ -73,7 +73,7 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public Response deleteProject(Long id, Long spaceId, User user) {
 
-        if (!projectRepository.existsByI(id))
+        if (!projectRepository.existsById(id))
             return new Response("Such project was not found!", false);
 
         projectRepository.deleteById(id);
